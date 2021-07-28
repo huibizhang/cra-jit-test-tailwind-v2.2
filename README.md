@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Getting Started with Create React App For Tailwind 2.2 JIT Mode
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
