@@ -12,7 +12,7 @@ function App() {
             }\
           "}
         </style>
-        <p>
+        <p className="bg-blue-300">
           Edit <code className="text-gray-400">src/App.js</code> and save to reload.
         </p>
         <a

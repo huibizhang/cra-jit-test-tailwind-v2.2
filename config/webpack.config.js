@@ -77,11 +77,49 @@ const hasJsxRuntime = (() => {
   }
 })();
 
+const patchPostCSS = (webpackConfig, tailwindConfig, components = false) => {
+  if (!tailwindConfig) {
+    console.error("Missing tailwind config :", tailwindConfig);
+    return;
+  }
+  const pluginName = "autoprefixer";
+  for (const rule of webpackConfig.module.rules) {
+    if (!(rule.use && rule.use.length > 0) || (!components && rule.exclude)) {
+      continue;
+    }
+    for (const useLoader of rule.use) {
+      if (!(useLoader.options && useLoader.options.postcssOptions)) {
+        continue;
+      }
+      const originPostcssOptions = useLoader.options.postcssOptions;
+      useLoader.options.postcssOptions = (loader) => {
+        const _postcssOptions = originPostcssOptions(loader);
+        const insertIndex = _postcssOptions.plugins.findIndex(
+          ({ postcssPlugin }) =>
+            postcssPlugin && postcssPlugin.toLowerCase() === pluginName
+        );
+        if (insertIndex !== -1) {
+          _postcssOptions.plugins.splice(insertIndex, 0, [
+            "tailwindcss",
+            tailwindConfig,
+          ]);
+        } else {
+          console.error(`${pluginName} not found in postcss plugins`);
+        }
+        return _postcssOptions;
+      };
+    }
+  }
+}
+
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
 module.exports = function (webpackEnv) {
   const isEnvDevelopment = webpackEnv === 'development';
   const isEnvProduction = webpackEnv === 'production';
+
+  // const tailwindConfig = require("./tailwind.config.js");
+  // patchPostCSS(webpackEnv, tailwindConfig, true);
 
   // Variable used for enabling profiling in Production
   // passed into alias object. Uses a flag if passed into the build command
@@ -133,6 +171,7 @@ module.exports = function (webpackEnv) {
             // so that it honors browserslist config in package.json
             // which in turn let's users customize the target behavior as per their needs.
             postcssNormalize(),
+            require('tailwindcss')
           ],
           sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
         },
