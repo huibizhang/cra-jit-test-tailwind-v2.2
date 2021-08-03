@@ -1,1 +1,41 @@
-# Getting Started with Create React App For Tailwind 2.2 JIT Mode
+# template-cra-tailwind-jit-v2.2
+
+- **template of:** create-react-app
+- **tailwindcss:** v2.2.7
+
+## Started
+with npm:
+```bash
+npm install
+```
+with yarn:
+```bash
+yarn
+```
+
+---
+## Develop
+with npm:
+```bash
+npm start
+```
+with yarn:
+```bash
+yarn start
+```
+
+---
+## Build
+with npm:
+```bash
+npm run build
+```
+with yarn:
+```bash
+yarn build
+```
+
+---
+<p align="center">
+<img src="./powered-by-vitawind-bright.png">
+</p>
