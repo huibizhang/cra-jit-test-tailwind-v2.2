@@ -14,12 +14,14 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "npm-run-all -p react_start tailwind_build",
-    "react_start": "react-scripts start",
-    "tailwind_build": "tailwind -i tailwind.css -o ./src/index.css -w",
-    "build": "react-scripts build",
+    "start": "npm-run-all -p react-start tailwind-watch",
+    "build": "npm-run-all -s tailwind-build react-build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "react-start": "react-scripts start",
+    "tailwind-watch": "tailwind -i tailwind.css -o ./src/index.css -w",
+    "react-build": "react-scripts build",
+    "tailwind-build": "tailwind -i tailwind.css -o ./src/index.css --jit --minify"
   },
   "eslintConfig": {
     "extends": [
