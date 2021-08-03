@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import poweredBy from './powered-by-vitawind-dark.png'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         >
           Learn React
         </a>
+        <img src={poweredBy} className="w-[200px] mx-auto mt-6 pointer-events-none" alt="powered-by" />
       </header>
     </div>
   );
