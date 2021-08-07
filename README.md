@@ -1,4 +1,4 @@
-# template-cra-tailwind-jit-v2.2
+# template-cra-tailwind-jit
 
 - **template of:** create-react-app
 - **tailwindcss:** v2.2.7
